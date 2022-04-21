@@ -47,6 +47,9 @@ public class FriendService {
             return false;
         }
         
+        if (primaryEmail.equals(friendEmail))
+            return false;
+
         List<String> emailList = getAllEmails();
 
         if (!emailList.contains(primaryEmail))
