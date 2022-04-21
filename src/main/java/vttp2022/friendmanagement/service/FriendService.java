@@ -1,7 +1,9 @@
 package vttp2022.friendmanagement.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,10 +30,11 @@ public class FriendService {
     public List<Update> getUpdateList (String email){
         List<Update> updateList = repo.getFriendUpdateList(email);
         List<Update> subscribeList = repo.getSubscribeUpdateList(email);
+        Set<Update> set = new HashSet<>(updateList);
         for (Update subscriber : subscribeList){
-            if (!updateList.contains(subscriber))
-                updateList.add(subscriber);
+            set.add(subscriber);
         }
+        updateList = new ArrayList<>(set);
         
         for (Update update: updateList){
             if (repo.verifyBlock(email,update.getSenderEmail())){
