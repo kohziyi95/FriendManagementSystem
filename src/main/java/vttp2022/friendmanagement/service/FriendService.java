@@ -28,15 +28,9 @@ public class FriendService {
     public List<Update> getUpdateList (String email){
         List<Update> updateList = repo.getFriendUpdateList(email);
         List<Update> subscribeList = repo.getSubscribeUpdateList(email);
-        for (int i=0; i < updateList.size(); i++){
-            for (int j=0; j < subscribeList.size(); j++){
-                if (updateList.get(i).getContent().equals(subscribeList.get(j).getContent()) 
-                    && (updateList.get(i).getSenderEmail().equals(subscribeList.get(j).getSenderEmail()))){
-                    continue;
-                } else {
-                    updateList.add(subscribeList.get(j));
-                }
-            }
+        for (Update subscriber : subscribeList){
+            if (!updateList.contains(subscriber))
+                updateList.add(subscriber);
         }
         
         for (Update update: updateList){
