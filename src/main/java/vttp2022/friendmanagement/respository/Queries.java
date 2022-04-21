@@ -21,6 +21,9 @@ public interface Queries {
     public static final String SQL_SELECT_UPDATES_BY_SUBSCRIBE = 
         "select * from updates join subscribe_relation on updates.sender_email = subscribe_relation.friend_email where subscribe_relation.primary_email=?";  
     
+    public static final String SQL_SELECT_UPDATES = 
+        "select * from updates join friend_relation on updates.sender_email = friend_relation.friend_email join subscribe_relation on updates.sender_email = subscribe_relation.friend_email where friend_relation.primary_email=?";
+        
     public static final String SQL_SELECT_FRIENDS_BY_EMAIL = 
         "select * from friend_relation where primary_email=?";
 

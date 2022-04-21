@@ -66,18 +66,28 @@ public class FriendRepository {
 
 
 
-    public List<Update> getFriendUpdateList(String primaryEmail){
-        final SqlRowSet result = template.queryForRowSet(SQL_SELECT_UPDATES_BY_FRIEND, primaryEmail);
-        List<Update> updateList = new ArrayList<>();
-        while (result.next()){
-            Update update = Update.createUpdate(result);
-            updateList.add(update);
-        };
-        return updateList;
-    }
+    // public List<Update> getFriendUpdateList(String primaryEmail){
+    //     final SqlRowSet result = template.queryForRowSet(SQL_SELECT_UPDATES_BY_FRIEND, primaryEmail);
+    //     List<Update> updateList = new ArrayList<>();
+    //     while (result.next()){
+    //         Update update = Update.createUpdate(result);
+    //         updateList.add(update);
+    //     };
+    //     return updateList;
+    // }
 
-    public List<Update> getSubscribeUpdateList(String primaryEmail){
-        final SqlRowSet result = template.queryForRowSet(SQL_SELECT_UPDATES_BY_SUBSCRIBE, primaryEmail);
+    // public List<Update> getSubscribeUpdateList(String primaryEmail){
+    //     final SqlRowSet result = template.queryForRowSet(SQL_SELECT_UPDATES_BY_SUBSCRIBE, primaryEmail);
+    //     List<Update> updateList = new ArrayList<>();
+    //     while (result.next()){
+    //         Update update = Update.createUpdate(result);
+    //         updateList.add(update);
+    //     };
+    //     return updateList;
+    // }
+
+    public List<Update> getUpdateList(String primaryEmail){
+        final SqlRowSet result = template.queryForRowSet(SQL_SELECT_UPDATES, primaryEmail);
         List<Update> updateList = new ArrayList<>();
         while (result.next()){
             Update update = Update.createUpdate(result);

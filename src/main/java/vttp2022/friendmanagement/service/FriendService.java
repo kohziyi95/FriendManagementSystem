@@ -28,13 +28,13 @@ public class FriendService {
     }
 
     public List<Update> getUpdateList (String email){
-        List<Update> updateList = repo.getFriendUpdateList(email);
-        List<Update> subscribeList = repo.getSubscribeUpdateList(email);
-        Set<Update> set = new HashSet<>(updateList);
-        for (Update subscriber : subscribeList){
-            set.add(subscriber);
-        }
-        updateList = new ArrayList<>(set);
+        // List<Update> updateList = repo.getFriendUpdateList(email);
+        // List<Update> subscribeList = repo.getSubscribeUpdateList(email);
+        // Set<Update> set = new HashSet<>(updateList);
+        // for (Update subscriber : subscribeList){
+        //     set.add(subscriber);
+        // }
+        List<Update> updateList = repo.getUpdateList(email);
         
         for (Update update: updateList){
             if (repo.verifyBlock(email,update.getSenderEmail())){
@@ -46,12 +46,11 @@ public class FriendService {
     }
 
     public boolean addFriendConnection (String primaryEmail, String friendEmail){
-        if (repo.verifyBlock(primaryEmail,friendEmail) || repo.verifyBlock(friendEmail,primaryEmail)){
+        if (repo.verifyBlock(primaryEmail,friendEmail) 
+            || repo.verifyBlock(friendEmail,primaryEmail)
+            || primaryEmail.equals(friendEmail)){
             return false;
         }
-        
-        if (primaryEmail.equals(friendEmail))
-            return false;
 
         List<String> emailList = getAllEmails();
 
