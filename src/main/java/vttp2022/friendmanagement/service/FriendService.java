@@ -30,9 +30,10 @@ public class FriendService {
         List<Update> subscribeList = repo.getSubscribeUpdateList(email);
         for (Update subscriber: subscribeList){
             for (Update update: updateList){
-                if (!(subscriber.getContent().equals(update.getContent()) 
-                    && subscriber.getSenderEmail().equals(update.getSenderEmail())))
+                if (!subscriber.getContent().equals(update.getContent())){
+                    if (!subscriber.getSenderEmail().equals(update.getSenderEmail()))
                     updateList.add(update);
+                } 
             }
         }
         
